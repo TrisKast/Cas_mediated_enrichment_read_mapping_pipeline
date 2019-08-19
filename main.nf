@@ -258,7 +258,7 @@ process Rpreprocess {
 
       //chmod -R 777 $PWD/Analysis
       """
-      Rscript harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
+      Rscript $PWD/harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
       """
       //chmod -R 777 $PWD/Analysis
 }
