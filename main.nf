@@ -125,7 +125,7 @@ process copy_data {
       """
 }
 
-myDir = file('/TestDir/testdir')
+myDir = file('TestDir/testdir')
 myDir.mkdirs()
 
 
