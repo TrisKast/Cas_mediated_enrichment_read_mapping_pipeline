@@ -120,9 +120,8 @@ process copy_data {
       """
 }
 
-myDir = file('TestDir')
-result = myDir.mkdir()
-println result ? "OK" : "Cannot create directory: $myDir"
+rawDataDir = file('RawData')
+rawDataDir.mkdir()
 
 
 
