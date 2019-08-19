@@ -125,6 +125,11 @@ process copy_data {
       """
 }
 
+myDir = file('/TestDir/testdir')
+myDir.mkdirs()
+
+
+
 
 /*process copy_Rscript {
   script:
