@@ -211,8 +211,8 @@ process Rpreprocess {
       file "delay_file.txt" from ch_delay_2
 
       output:
-      //file "*OnTarget.mappedreads" into ch_R_onTarget
-      //file "*OffTarget.mappedreads" into ch_R_offTarget
+      file "*OnTarget.mappedreads" into ch_R_onTarget
+      file "*OffTarget.mappedreads" into ch_R_offTarget
 
       file "delay_file.txt" into ch_delay_3, ch_delay_4
 
@@ -221,9 +221,11 @@ process Rpreprocess {
       analysisDir = file('Analysis')
       analysisDir.setPermissions(7,7,7)
 
-      //chmod -R 777 $PWD/Analysis
+      //
       """
+      chmod -R 777 Analysis
       Rscript ${workflow.projectDir}/bin/harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
+      chmod -R 777 Analysis
       """
       //chmod -R 777 $PWD/Analysis
       analysisDir.setPermissions(7,7,7)
