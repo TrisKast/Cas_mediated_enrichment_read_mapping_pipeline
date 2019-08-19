@@ -248,11 +248,12 @@ process Rpreprocess {
       file "delay_file.txt" into ch_delay_3, ch_delay_4
 
       script:
+
+      //chmod -R 777 $PWD/Analysis
       """
-      chmod -R 777 $PWD/Analysis
       Rscript harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
-      chmod -R 777 $PWD/Analysis
       """
+      //chmod -R 777 $PWD/Analysis
 }
 
 process onTargetReadDump{
