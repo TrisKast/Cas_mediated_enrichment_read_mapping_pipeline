@@ -117,11 +117,6 @@ process copy_data {
       os.system("cp $targets $PWD/RawData/")
       os.system("cp $reads $PWD/RawData/")
       os.system("cp $reference $PWD/ReferenceData/")
-
-      os.system("chmod 777 ${workflow.projectDir}/harvest.R")
-      os.system("chmod +x bin/harvest.R")
-      print("cp ${workflow.projectDir}/harvest.R $PWD/harvest.R")
-      os.system("cp ${workflow.projectDir}/harvest.R $PWD/harvest.R")
       """
 }
 
