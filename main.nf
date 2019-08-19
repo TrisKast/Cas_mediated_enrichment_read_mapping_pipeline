@@ -96,8 +96,8 @@ rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
 refDataDir.mkdir()
 
-target_file = file("$targets")
-target_file.copyTo('RawData/')
+reads_file = file(params.reads)
+reads_file.copyTo('RawData/')
 
 process copy_data {
       input:
