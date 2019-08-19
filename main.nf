@@ -96,6 +96,9 @@ rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
 refDataDir.mkdir()
 
+target_file = "$targets"
+target_file.copyTo('RawData/')
+
 process copy_data {
       input:
       file reads from ch_reads_copy
@@ -113,18 +116,6 @@ process copy_data {
       os.system("cp $reference $PWD/ReferenceData/")
       """
 }
-
-
-
-
-
-/*process copy_Rscript {
-  script:
-  """
-  cp ${workflow.projectDir}/harvest.R $PWD/harvest.R
-  """
-}*/
-
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
