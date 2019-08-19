@@ -94,7 +94,7 @@ log.info "========================================="
 rawDataDir = file('RawData')
 rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
-refDataDir.mkdir
+refDataDir.mkdir()
 
 process copy_data {
       input:
