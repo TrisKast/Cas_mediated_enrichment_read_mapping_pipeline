@@ -96,8 +96,8 @@ rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
 refDataDir.mkdir()
 
-reads_file = file(params.reads)
-reads_file.copyTo('RawData/'+params.reads.baseName())
+//reads_file = file(params.reads)
+//reads_file.copyTo('RawData/'+params.reads.baseName())
 
 process copy_data {
       input:
