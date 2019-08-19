@@ -91,10 +91,10 @@ log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
 
-//if [ ! -d "$PWD/RawData" ]; then
-//  mkdir $PWD/RawData
-//fi
-
+rawDataDir = file('RawData')
+rawDataDir.mkdir()
+refDataDir = file('ReferenceData')
+refDataDir.mkdir
 
 process copy_data {
       input:
@@ -108,20 +108,12 @@ process copy_data {
       import sys
       import os
 
-      if not os.path.isdir('$PWD/RawData/'):
-        os.system("mkdir $PWD/RawData/")
-
-      if not os.path.isdir('$PWD/ReferenceData/'):
-        os.system("mkdir $PWD/ReferenceData/")
-
       os.system("cp $targets $PWD/RawData/")
       os.system("cp $reads $PWD/RawData/")
       os.system("cp $reference $PWD/ReferenceData/")
       """
 }
 
-rawDataDir = file('RawData')
-rawDataDir.mkdir()
 
 
 
