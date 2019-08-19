@@ -125,8 +125,9 @@ process copy_data {
       """
 }
 
-myDir = file('TestDir/testdir')
-myDir.mkdirs()
+myDir = file('TestDir')
+result = myDir.mkdir()
+println result ? "OK" : "Cannot create directory: $myDir"
 
 
 
