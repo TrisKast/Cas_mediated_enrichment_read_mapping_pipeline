@@ -99,7 +99,7 @@ refDataDir.mkdir()
 reads_file = file(params.reads)
 reads_file.copyTo('RawData/')
 
-process copy_data {
+/*process copy_data {
       input:
       file reads from ch_reads_copy
       file reference from ch_reference_copy
@@ -115,7 +115,7 @@ process copy_data {
       os.system("cp $reads $PWD/RawData/")
       os.system("cp $reference $PWD/ReferenceData/")
       """
-}
+}*/
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
