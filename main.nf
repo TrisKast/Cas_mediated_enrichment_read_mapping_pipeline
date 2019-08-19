@@ -25,10 +25,6 @@ def helpMessage() {
     """.stripIndent()
 }
 
-/*
- * SET UP CONFIGURATION VARIABLES
- */
-
 // Show help emssage
 if (params.help){
     helpMessage()
@@ -199,7 +195,7 @@ process samtools_view_unmapped {
       file "delay_file.txt" into ch_delay_2
 
       script:
-      """${workflow.projectDir}/bin/harvest.R
+      """
       samtools view -@ 5 -O sam $unmapped_bamfile | awk '{{print \$11}}' > ${custom_runName}.unmapped.quals
       """
 }
