@@ -226,12 +226,11 @@ process Rpreprocess {
       """
       chmod -R 777 Analysis
       Rscript ${workflow.projectDir}/bin/harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
-      chmod -R 777 Analysis
       """
       //chmod -R 777 $PWD/Analysis
-      analysisDir.setPermissions(7,7,7)
+      //analysisDir.setPermissions(7,7,7)
 }
-
+/*
 process onTargetReadDump{
       publishDir "$PWD/Analysis/OnTarget", mode: 'copy'
       params.onTarget = "$PWD/Analysis/OnTarget/${custom_runName}.OnTarget.mappedreads"
@@ -270,7 +269,7 @@ process offTargetReadDump{
       """
       seqtk subseq $allReads $offTargetReads > ${custom_runName}.OffTarget.fastq
       """
-}
+}*/
 
 
 
