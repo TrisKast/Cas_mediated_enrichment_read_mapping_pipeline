@@ -98,24 +98,14 @@ refDataDir.mkdir()
 
 reads_file = file(params.reads)
 reads_file.copyTo('RawData/')
+target_file = file(params.targets)
+target_file.copyTo('RawData/')
+reference_file = file(params.reference)
+reference_file.copyTo('ReferenceData/')
 
-/*process copy_data {
-      input:
-      file reads from ch_reads_copy
-      file reference from ch_reference_copy
-      file targets from ch_targets_copy
+harvest_script = file('${workflow.projectDir}/bin/harvest.R')
+harvest_script.setPermissions(7,7,7)
 
-      script:
-      """
-      #!/usr/bin/env python
-      import sys
-      import os
-
-      os.system("cp $targets $PWD/RawData/")
-      os.system("cp $reads $PWD/RawData/")
-      os.system("cp $reference $PWD/ReferenceData/")
-      """
-}*/
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
@@ -209,9 +199,8 @@ process samtools_view_unmapped {
       file "delay_file.txt" into ch_delay_2
 
       script:
-      """
+      """${workflow.projectDir}/bin/harvest.R
       samtools view -@ 5 -O sam $unmapped_bamfile | awk '{{print \$11}}' > ${custom_runName}.unmapped.quals
-
       """
 }
 
@@ -233,11 +222,15 @@ process Rpreprocess {
 
       script:
 
+      analysisDir = file('Analysis')
+      analysisDir.setPermissions(7,7,7)
+
       //chmod -R 777 $PWD/Analysis
       """
       Rscript ${workflow.projectDir}/bin/harvest.R $targets ${custom_runName} $reference $gstride $target_proximity $offtarget_level 16 $PWD
       """
       //chmod -R 777 $PWD/Analysis
+      analysisDir.setPermissions(7,7,7)
 }
 
 process onTargetReadDump{
