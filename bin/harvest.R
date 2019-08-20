@@ -1,15 +1,14 @@
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
 
 #BiocManager::install("ShortRead")
-BiocManager::install("pbmcapply")
-BiocManager::install("dplyr")
-BiocManager::install("GenomicRanges")
-#library(ShortRead)
+#BiocManager::install("pbmcapply")
+#BiocManager::install("dplyr")
+#BiocManager::install("GenomicRanges")
 
+library(ShortRead)
 library(yaml)
 library(parallel)
-
 library(pbmcapply)
 library(dplyr)
 library(GenomicRanges)
