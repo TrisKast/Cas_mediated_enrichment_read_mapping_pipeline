@@ -86,7 +86,7 @@ summary['offtarget_level']        = params.offtarget_level
 log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
-
+/*
 rawDataDir = file('RawData')
 rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
@@ -101,7 +101,7 @@ reference_file.copyTo('ReferenceData/')
 
 harvest_script = file('${workflow.projectDir}/bin/harvest.R')
 harvest_script.setPermissions(7,7,7)
-
+*/
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
