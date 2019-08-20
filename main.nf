@@ -213,7 +213,6 @@ process Rpreprocess {
       output:
       //file "*OnTarget.mappedreads" into ch_R_onTarget
       //file "*OffTarget.mappedreads" into ch_R_offTarget
-      //file "*" into ch_R
 
       file "delay_file.txt" into ch_delay_3, ch_delay_4
 
