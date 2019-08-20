@@ -63,6 +63,15 @@ offtarget_level <- as.integer(config$offtarget_level)
 tutorialText   <- config$tutorialText
 gstride <- as.integer(config$gstride)
 
+#args = commandArgs(trailingOnly=TRUE)
+#bed_src <- args[1]
+#study <- args[2]
+#reference <- args[3]
+#gstride <- as.integer(args[4])
+#target_proximity <- as.integer(args[5])
+#offtarget_level <- as.integer(args[6])
+#tutorialText   <- args[3]
+
 ### here lie dragons ###
 # expeditions below this comment at your own risk
 # welcome feedback and suggestions ...

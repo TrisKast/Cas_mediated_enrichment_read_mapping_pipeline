@@ -265,6 +265,21 @@ process offTargetReadDump{
       """
 }
 
+/*
+process renderReport{
+      publishDir "$PWD", mode: 'copy'
+
+      output:
+      file "*" into ch_rederReport
+
+      script:
+      """
+      R --slave -e 'rmarkdown::render("ont_tutorial_cas9.Rmd", "html_document")'
+      """
+}*/
+
+
+
 
 
 workflow.onComplete {
