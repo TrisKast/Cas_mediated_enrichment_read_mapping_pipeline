@@ -281,7 +281,7 @@ process renderReport{
       //file delay_file_2 from ch_delay_6
 
       output:
-      file "*" into ch_rederReport
+      
 
       script:
       """
