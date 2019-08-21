@@ -63,14 +63,6 @@ offtarget_level <- as.integer(config$offtarget_level)
 tutorialText   <- config$tutorialText
 gstride <- as.integer(config$gstride)
 
-#args = commandArgs(trailingOnly=TRUE)
-#bed_src <- args[1]
-#study <- args[2]
-#reference <- args[3]
-#gstride <- as.integer(args[4])
-#target_proximity <- as.integer(args[5])
-#offtarget_level <- as.integer(args[6])
-#tutorialText   <- args[3]
 
 ### here lie dragons ###
 # expeditions below this comment at your own risk
@@ -321,9 +313,9 @@ We would like to explore the read mapping information around this gene. The comm
 
 
 ```
-igv -g ./ReferenceData/Homo_sapiens.GRCh38.dna.chromosome.4.fa \
-./Analysis/Minimap2/cas9_FAK76554.bam,./RawData/enrichment_targets.bed \
-4:49091201-49156600
+igv -g ./ReferenceData/```reference``` \
+./Analysis/Minimap2/```study```.bam,./RawData/```basename(target)``` \
+9:27546545-27546545
 ```
 
 ** please note that if you are using your own reference genome and BED file that the parameters above may require modifications **
