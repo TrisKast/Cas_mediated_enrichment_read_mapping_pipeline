@@ -86,6 +86,8 @@ summary['offtarget_level']        = params.offtarget_level
 log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
+//resultsDir = file(custom_runName)
+//resultsDir.mkdir()
 
 rawDataDir = file('RawData')
 rawDataDir.mkdir()
@@ -304,7 +306,7 @@ process renderReport{
       sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' $PWD/config.yaml
       sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
-      R --slave -e 'rmarkdown::render("$PWD/ont_tutorial_cas9.Rmd", "html_document")'
+      R --slave -e 'rmarkdown::render("$PWD/ont_tutorial_cas9.Rmd", ${custom_runName})'
 
       """
 }
