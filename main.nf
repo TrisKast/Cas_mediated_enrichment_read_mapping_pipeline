@@ -257,11 +257,11 @@ process offTargetReadDump{
       file allReads from ch_offTargetReadDump
       file offTargetReads from ch_R_offTarget
 
-      file "delay_file.txt" from ch_delay_5
+      file "delay_file.txt" from ch_delay_4
 
       output:
       file "${custom_runName}.OffTarget.fastq" into ch_offTargetReadDump_fastq
-      file "delay_file.txt" into ch_delay_6
+      file "delay_file.txt" into ch_delay_5
 
       script:
       """
@@ -277,7 +277,7 @@ process renderReport{
       file targets from ch_targets_report
       file reference from ch_reference_report
 
-      file "delay_file.txt" from ch_delay_7
+      file "delay_file.txt" from ch_delay_5
 
       output:
 
