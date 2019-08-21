@@ -216,7 +216,7 @@ process Rpreprocess {
       //file "*OnTarget.mappedreads" into ch_R_onTarget
       //file "*OffTarget.mappedreads" into ch_R_offTarget
 
-      file "delay_file.txt" into ch_delay_3, ch_delay_4
+      file "delay_file.txt" into ch_delay_3
 
       script:
       """
@@ -240,7 +240,7 @@ process onTargetReadDump{
 
       output:
       file "${custom_runName}.OnTarget.fastq" into ch_onTargetReadDump_fastq
-      file "delay_file.txt" into ch_delay_5
+      file "delay_file.txt" into ch_delay_4
 
       script:
       """
@@ -257,7 +257,7 @@ process offTargetReadDump{
       file allReads from ch_offTargetReadDump
       file offTargetReads from ch_R_offTarget
 
-      file "delay_file.txt" from ch_delay_4
+      file "delay_file.txt" from ch_delay_5
 
       output:
       file "${custom_runName}.OffTarget.fastq" into ch_offTargetReadDump_fastq
@@ -277,11 +277,10 @@ process renderReport{
       file targets from ch_targets_report
       file reference from ch_reference_report
 
-      //file delay_file_1 from ch_delay_5
-      //file delay_file_2 from ch_delay_6
+      file "delay_file.txt" from ch_delay_7
 
       output:
-      
+
 
       script:
       """
@@ -293,10 +292,9 @@ process renderReport{
       sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' $PWD/config.yaml
       sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
-
+      R --slave -e 'rmarkdown::render("ont_tutorial_cas9.Rmd", "html_document")'
 
       """
-      //R --slave -e 'rmarkdown::render("ont_tutorial_cas9.Rmd", "html_document")'
 }
 
 
