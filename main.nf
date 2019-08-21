@@ -306,7 +306,7 @@ process renderReport{
       sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' $PWD/config.yaml
       sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
-      R --slave -e 'rmarkdown::render("$PWD/ont_tutorial_cas9.Rmd", ${custom_runName})'
+      R --slave -e 'rmarkdown::render("$PWD/ont_tutorial_cas9.Rmd", "${custom_runName}")'
 
       """
 }
