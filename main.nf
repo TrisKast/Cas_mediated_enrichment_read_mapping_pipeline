@@ -99,7 +99,7 @@ target_file.copyTo('RawData/')
 reference_file = file(params.reference)
 reference_file.copyTo('ReferenceData/')
 
-harvest_script = file('${workflow.projectDir}/bin/harvest.R')
+harvest_script = file(workflow.projectDir+'/bin/harvest.R')
 harvest_script.setPermissions(7,7,7)
 
 config_yaml = file(workflow.projectDir+'/config.yaml')
@@ -277,8 +277,8 @@ process renderReport{
       file targets from ch_targets_report
       file reference from ch_reference_report
 
-      file delay_file_1 from ch_delay_5
-      file delay_file_2 from ch_delay_6
+      //file delay_file_1 from ch_delay_5
+      //file delay_file_2 from ch_delay_6
 
       output:
       file "*" into ch_rederReport
