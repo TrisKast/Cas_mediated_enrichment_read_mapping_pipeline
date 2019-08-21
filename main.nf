@@ -285,13 +285,13 @@ process renderReport{
 
       script:
       """
-      sed -i -e 's/THREADS/16/g' config.yaml
-      sed -i -e 's/OFFTARGET_LEVEL/$offtarget_level/g' config.yaml
-      sed -i -e 's/TARGET_PROXIMITY/$target_proximity/g' config.yaml
-      sed -i -e 's/GSTRIDE/$gstride/g' config.yaml
-      sed -i -e 's/STUDY_NAME/${custom_runName}/g' config.yaml
-      sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' config.yaml
-      sed -i -e 's/TARGET_BED/$targets/g' config.yaml
+      sed -i -e 's/THREADS/16/g' $PWD/config.yaml
+      sed -i -e 's/OFFTARGET_LEVEL/$offtarget_level/g' $PWD/config.yaml
+      sed -i -e 's/TARGET_PROXIMITY/$target_proximity/g' $PWD/config.yaml
+      sed -i -e 's/GSTRIDE/$gstride/g' $PWD/config.yaml
+      sed -i -e 's/STUDY_NAME/${custom_runName}/g' $PWD/config.yaml
+      sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' $PWD/config.yaml
+      sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
 
 
