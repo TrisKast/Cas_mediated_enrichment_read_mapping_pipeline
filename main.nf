@@ -99,12 +99,10 @@ target_file.copyTo('RawData/')
 reference_file = file(params.reference)
 reference_file.copyTo('ReferenceData/')
 
-print(workflow.projectDir)
-
 harvest_script = file('${workflow.projectDir}/bin/harvest.R')
 harvest_script.setPermissions(7,7,7)
 
-config_yaml = file('${workflow.projectDir}/config.yaml')
+config_yaml = file(workflow.projectDir}+'/config.yaml')
 config_yaml.copyTo('.')
 
 process minimap_index {
