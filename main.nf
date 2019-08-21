@@ -91,6 +91,8 @@ rawDataDir = file('RawData')
 rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
 refDataDir.mkdir()
+staticDir = file('Static')
+staticDir.mkdir()
 
 reads_file = file(params.reads)
 reads_file.copyTo('RawData/')
@@ -99,11 +101,21 @@ target_file.copyTo('RawData/')
 reference_file = file(params.reference)
 reference_file.copyTo('ReferenceData/')
 
-harvest_script = file(workflow.projectDir+'/bin/harvest.R')
-harvest_script.setPermissions(7,7,7)
 
 config_yaml = file(workflow.projectDir+'/config.yaml')
 config_yaml.copyTo('.')
+report_Rmd = file(workflow.projectDir+'/ont_tutorial_cas9.Rmd')
+report_Rmd.copyTo('.')
+report_md = file(workflow.projectDir+'/ont_tutorial_cas9.md')
+report_md.copyTo('.')
+
+bib_file = file(workflow.projectDir+'/Static/Bibliography.bib')
+bib_file.copyTo('Static/')
+css_file = file(workflow.projectDir+'/Static/ont_css.css')
+css_file.copyTo('Static/')
+
+harvest_script = file(workflow.projectDir+'/bin/harvest.R')
+harvest_script.setPermissions(7,7,7)
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
