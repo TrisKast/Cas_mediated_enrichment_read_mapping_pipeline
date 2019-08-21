@@ -52,12 +52,12 @@ Channel
 Channel
         .fromPath( params.reference )
         .ifEmpty { exit 1, "Cannot find any reference file matching: ${params.reads} !" }
-        .into {ch_reference_copy; ch_reference_minimap; ch_reference_R}
+        .into {ch_reference_copy; ch_reference_minimap; ch_reference_R; ch_reference_report}
 
 Channel
         .fromPath( params.targets )
         .ifEmpty { exit 1, "Cannot find any target region file matching: ${params.reads} !" }
-        .into {ch_targets_copy; ch_targets_R}
+        .into {ch_targets_copy; ch_targets_R; ch_targets_report}
 
 
 // Header log info
@@ -238,6 +238,7 @@ process onTargetReadDump{
 
       output:
       file "${custom_runName}.OnTarget.fastq" into ch_onTargetReadDump_fastq
+      file "delay_file.txt" into ch_delay_5
 
       script:
       """
@@ -258,6 +259,7 @@ process offTargetReadDump{
 
       output:
       file "${custom_runName}.OffTarget.fastq" into ch_offTargetReadDump_fastq
+      file "delay_file.txt" into ch_delay_6
 
       script:
       """
@@ -265,18 +267,22 @@ process offTargetReadDump{
       """
 }
 
-/*
+
 process renderReport{
       publishDir "$PWD", mode: 'copy'
+
+      input:
+      file targets from ch_targets_report
+      file reference from ch_reference_report
+
+      file "delay_file.txt" from ch_delay_5
+      file "delay_file.txt" from ch_delay_6
 
       output:
       file "*" into ch_rederReport
 
-      script:
-      """
-      R --slave -e 'rmarkdown::render("ont_tutorial_cas9.Rmd", "html_document")'
-      """
-}*/
+
+}
 
 
 
