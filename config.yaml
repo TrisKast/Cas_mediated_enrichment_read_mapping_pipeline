@@ -1,0 +1,26 @@
+---
+
+pipeline: "Nanopore Cas9 enrichment"
+
+# define a name to describe the workflow; this will be used to name BAM files etc
+study_name: "STUDY_NAME"
+
+# pointer to a reference sequence that reads will be mapped to
+reference_genome: "REFERENCE_GENOME_FASTA"
+
+# bed file describing the target regions
+target_regions: "RawData/TARGET_BED"
+
+# gstride is the bin size for summarising depth of coverage across the reference_genome
+gstride: GSTRIDE
+
+# target_proximity is the distance up- and down-stream of ontarget BED for defining target proximal mapping
+target_proximity: TARGET_PROXIMITY
+
+# a threshold for defining off-target mapping; this is ($level$ * mean background) expression
+offtarget_level: OFFTARGET_LEVEL
+
+# how many threads may a process use on this system?
+threads: 16
+
+tutorialText: FALSE

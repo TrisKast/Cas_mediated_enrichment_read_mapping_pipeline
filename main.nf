@@ -86,7 +86,7 @@ summary['offtarget_level']        = params.offtarget_level
 log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
-/*
+
 rawDataDir = file('RawData')
 rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
@@ -101,7 +101,9 @@ reference_file.copyTo('ReferenceData/')
 
 harvest_script = file('${workflow.projectDir}/bin/harvest.R')
 harvest_script.setPermissions(7,7,7)
-*/
+
+config_yaml = file('${workflow.projectDir}/config.yaml')
+config_yaml.copyTo('.')
 
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
@@ -283,8 +285,18 @@ process renderReport{
 
       script:
       """
+      sed -i -e 's/THREADS/16/g' config.yaml
+      sed -i -e 's/OFFTARGET_LEVEL/$offtarget_level/g' config.yaml
+      sed -i -e 's/TARGET_PROXIMITY/$target_proximity/g' config.yaml
+      sed -i -e 's/GSTRIDE/$gstride/g' config.yaml
+      sed -i -e 's/STUDY_NAME/${custom_runName}/g' config.yaml
+      sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' config.yaml
+      sed -i -e 's/TARGET_BED/$targets/g' config.yaml
+
+
 
       """
+      //R --slave -e 'rmarkdown::render("ont_tutorial_cas9.Rmd", "html_document")'
 }
 
 
