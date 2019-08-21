@@ -8,7 +8,7 @@ output:
     self_contained: yes
     theme: default
     highlight: null
-    css: Static/ont_tutorial.css
+    css: Static/ont_css.css
     toc: yes
     toc_depth: 2
     toc_float:
