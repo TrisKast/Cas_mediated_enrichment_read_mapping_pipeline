@@ -281,7 +281,10 @@ process renderReport{
       output:
       file "*" into ch_rederReport
 
+      script:
+      """
 
+      """
 }
 
 
