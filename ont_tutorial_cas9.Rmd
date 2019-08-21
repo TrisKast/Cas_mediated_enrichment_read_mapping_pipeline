@@ -320,9 +320,9 @@ legendDF <- data.frame(x=Inf, y=Inf,
                          col=rep(seq(1, colMax), length.out=length(plotLegend)))
 
 # add row and column data to aggregatedGR
-#aggregatedGR$row <- unlist(lapply(aggregatedGR$gene, function(x) { which(posMatrix==x, arr.ind=TRUE)[[1]] }))
-#aggregatedGR$col <- unlist(lapply(aggregatedGR$gene, function(x) { which(posMatrix==x, arr.ind=TRUE)[[2]] }))
-#
+aggregatedGR$row <- unlist(lapply(aggregatedGR$gene, function(x) { which(posMatrix==x, arr.ind=TRUE)[[1]] }))
+aggregatedGR$col <- unlist(lapply(aggregatedGR$gene, function(x) { which(posMatrix==x, arr.ind=TRUE)[[2]] }))
+
 # - this lapply uses the whole data and takes a little too long ..
 aggregatedGR$row <- 0
 aggregatedGR$col <- 0
