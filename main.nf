@@ -105,7 +105,7 @@ reference_file.copyTo('ReferenceData/')
 
 config_yaml = file(workflow.projectDir+'/config.yaml')
 config_yaml.copyTo('.')
-report_Rmd = file(workflow.projectDir+'/report_rendering.Rmd')
+report_Rmd = file(workflow.projectDir+'/report.Rmd')
 report_Rmd.copyTo('.')
 
 bib_file = file(workflow.projectDir+'/Static/Bibliography.bib')
@@ -313,7 +313,7 @@ process renderReport{
       sed -i -e 's/REFERENCE_GENOME_FASTA/$reference/g' $PWD/config.yaml
       sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
-      R --slave -e 'rmarkdown::render("$PWD/report_rendering.Rmd", "html_document")'
+      R --slave -e 'rmarkdown::render("$PWD/report.Rmd", "html_document")'
       """
 }
 
