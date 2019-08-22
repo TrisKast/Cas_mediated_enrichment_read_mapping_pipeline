@@ -86,9 +86,9 @@ summary['offtarget_level']        = params.offtarget_level
 log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
-//resultsDir = file(custom_runName)
-//resultsDir.mkdir()
 
+// The incluction of the Rscripts is not as pretty as it could be
+// Therefore they rely on the data being in the correct paths
 rawDataDir = file('RawData')
 rawDataDir.mkdir()
 refDataDir = file('ReferenceData')
@@ -103,7 +103,6 @@ target_file.copyTo('RawData/')
 reference_file = file(params.reference)
 reference_file.copyTo('ReferenceData/')
 
-
 config_yaml = file(workflow.projectDir+'/config.yaml')
 config_yaml.copyTo('.')
 report_Rmd = file(workflow.projectDir+'/report_rendering.Rmd')
@@ -117,6 +116,7 @@ css_file.copyTo('Static/')
 harvest_script = file(workflow.projectDir+'/bin/harvest.R')
 harvest_script.setPermissions(7,7,7)
 
+// Build the mapping index
 process minimap_index {
       publishDir "$PWD/ReferenceData", mode: 'copy'
 
@@ -132,6 +132,7 @@ process minimap_index {
       """
   }
 
+// Mapping
 process minimap_run {
 
       input:
@@ -148,6 +149,8 @@ process minimap_run {
       """
 }
 
+// Transform the mapped reads in the sam file into a bam file
+// Also save the unmapped reads in a bam file (-U)
 process samtools_view {
       publishDir "$PWD/Analysis/Minimap2", mode: 'copy', pattern: '*unmapped*'
 
@@ -164,6 +167,7 @@ process samtools_view {
       """
 }
 
+// Sorting
 process samtools_sort {
       publishDir "$PWD/Analysis/Minimap2", mode: 'copy'
 
@@ -179,6 +183,7 @@ process samtools_sort {
       """
 }
 
+// Indexing of the sorted bam file
 process samtools_index {
       publishDir "$PWD/Analysis/Minimap2", mode: 'copy'
 
@@ -196,7 +201,7 @@ process samtools_index {
       """
 }
 
-// render quality values from unmapped reads
+// Re-transform the bam file containing the mapped reads into a sam file and extract the qualities
 process samtools_view_unmapped {
       publishDir "$PWD/Analysis/Minimap2", mode: 'copy'
 
@@ -214,7 +219,7 @@ process samtools_view_unmapped {
       """
 }
 
-// perform the R preprocess
+// Call the R-Script, tbh. still mostly a black box at this point
 process Rpreprocess {
       publishDir "$PWD/Analysis/R", mode: 'copy'
 
@@ -225,9 +230,6 @@ process Rpreprocess {
       file "delay_file.txt" from ch_delay_2
 
       output:
-      //file "*OnTarget.mappedreads" into ch_R_onTarget
-      //file "*OffTarget.mappedreads" into ch_R_offTarget
-
       file "delay_file.txt" into ch_delay_3
 
       script:
@@ -239,6 +241,7 @@ process Rpreprocess {
 
 }
 
+// Extract the onTarget reads into a new fastq file, based on the identifed read IDs by harvest.R
 process onTargetReadDump{
       publishDir "$PWD/Analysis/OnTarget", mode: 'copy'
       params.onTarget = "$PWD/Analysis/OnTarget/${custom_runName}.OnTarget.mappedreads"
@@ -260,6 +263,7 @@ process onTargetReadDump{
       """
 }
 
+// Extract the offTarget reads into a new fastq file, based on the identifed read IDs by harvest.R
 process offTargetReadDump{
       publishDir "$PWD/Analysis/OffTarget", mode: 'copy'
       params.offTarget = "$PWD/Analysis/OffTarget/${custom_runName}.OffTarget.mappedreads"
@@ -281,6 +285,11 @@ process offTargetReadDump{
       """
 }
 
+// Render the html-report
+// Supoptimal solution with the config file
+// TODO: -Implement solution to pass parameter directly into the Rmd script
+//       -"1.6 Graphical review of depth-of-coverage for target genes" section is not working
+//       -"2 Off-target mapping" section is not working
 
 process renderReport{
       publishDir "$PWD", mode: 'copy'
@@ -293,8 +302,8 @@ process renderReport{
 
       output:
 
-
       script:
+      //First change the config_yaml to the correct parameter, then call the report rendering script
       """
       sed -i -e 's/THREADS/16/g' $PWD/config.yaml
       sed -i -e 's/OFFTARGET_LEVEL/$offtarget_level/g' $PWD/config.yaml
@@ -305,12 +314,8 @@ process renderReport{
       sed -i -e 's/TARGET_BED/$targets/g' $PWD/config.yaml
 
       R --slave -e 'rmarkdown::render("$PWD/report_rendering.Rmd", "html_document")'
-
       """
 }
-
-
-
 
 
 workflow.onComplete {
