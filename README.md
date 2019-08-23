@@ -21,7 +21,7 @@ The pipeline comes with documentation, found in the `docs/` directory:
 2. Pipeline configuration
     * [Local installation](docs/configuration/local.md)
 3. [Running the pipeline](docs/usage.md)
-4. [Output and how to interpret the results](docs/output.md)
+4. [Output](docs/output.md)
 
 
 ### Credits
