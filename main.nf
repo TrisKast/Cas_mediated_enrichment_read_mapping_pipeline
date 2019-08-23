@@ -113,7 +113,7 @@ css_file = file(workflow.projectDir+'/Static/ont_css.css')
 css_file.copyTo('Static/')
 
 harvest_script = file(workflow.projectDir+'/bin/harvest.R')
-harvest_script.setPermissions(7,7,7)
+//harvest_script.setPermissions(7,7,7)
 
 // Build the mapping index
 process minimap_index {
