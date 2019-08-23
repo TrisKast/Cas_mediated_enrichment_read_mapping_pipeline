@@ -86,6 +86,8 @@ summary['offtarget_level']        = params.offtarget_level
 log.info summary.collect { k,v -> "${k.padRight(15)}: $v" }.join("\n")
 log.info "========================================="
 
+projectDir = file(custom_runName)
+projectDir.mkdir()
 
 // The incluction of the Rscripts is not as pretty as it could be
 // Therefore they rely on the data being in the correct paths
