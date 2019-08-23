@@ -89,7 +89,11 @@ log.info "========================================="
 projectDir = file(custom_runName)
 projectDir.mkdir()
 
-print(PWD) 
+print(PWD)
+
+PWD = PWD+"/"+custom_runName
+
+print(PWD)
 
 // The incluction of the Rscripts is not as pretty as it could be
 // Therefore they rely on the data being in the correct paths
