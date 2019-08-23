@@ -5,7 +5,7 @@
 [![Docker Repository on Dockerhub](https://img.shields.io/badge/docker-available-green.svg "Docker Repository on Dockerhub")](https://hub.docker.com/r/tristankast/cas_pipeline)
 
 ### Introduction
-This pipeline mapps long DNA sequence reads to a reference genome, and evaluates the performance of a Cas9 based target enrichment strategy. The workflow is suitable for Oxford Nanopore fastq sequence collections and requires a reference genome and a BED file of target coordinates. The program is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It comes with docker / singularity containers making installation trivial and results highly reproducible.
+This pipeline maps long DNA sequence reads to a reference genome, and evaluates the performance of a Cas9 based target enrichment strategy. The workflow is suitable for Oxford Nanopore fastq sequence collections and requires a reference genome and a BED file of target coordinates. The program is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It comes with docker / singularity containers making installation trivial and results highly reproducible.
 
 The current workflow consists of:
 1. Mapping of the reads onto a reference genome

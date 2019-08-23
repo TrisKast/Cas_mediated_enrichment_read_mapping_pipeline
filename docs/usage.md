@@ -51,36 +51,51 @@ Use this parameter to choose a configuration profile. Each profile is designed f
     * A generic configuration profile to be used with [Docker](http://docker.com/)
     * Runs using the `local` executor and pulls software from dockerhub:[`Cas_mediated_enrichment_read_mapping_pipeline`](https://hub.docker.com/r/tristankast/cas_pipeline)
 * `galaxy`
-    *
-    *
+    * Runs the pipeline with optimized settings for one of our local machines
 * `none`
     * No configuration at all. Useful if you want to build your own config from scratch and want to avoid loading in the default `base` config profile (not recommended).
 
-### `--shortReads`
-Use this to specify the location of your paired, short-read files in fastq.gz format. For example:
+### `--reads`
+Use this to specify the location of your Nanopore reads in fastq format. For example:
 
 ```bash
---shortReads 'path/to/data/sample_*_{1,2}.fastq.gz'
+--reads path/to/reads.fastq
 ```
 
-### `--longReads`
-Use this flag to indicate the path to your gzipped fastq files containing the long reads (Nanopore or PacBio).
+### `--reference`
+Use this flag to indicate the path to your reference genome file in fasta format.
 
 ```bash
---longReads path/to/long/reads/my_long_reads.fastq.gz
+--reference path/to/reference.fasta
 ```
 
-### `--assembler`
-Canu example:
+### `--targets`
+Use this flag to specify the path to your target BED file, containing the genomic location of the enriched region.
+
 ```bash
---assembler canu --genomeSize 4.6m
+--targets path/to/targets.bed
 ```
 
-### `--fasta`
-If you prefer, you can specify the full path to your reference genome when you run the pipeline:
+### `--gstride`
+Set the bin size for summarizing depth of coverage across the reference genome.
+Default: 80
 
 ```bash
---fasta '[path to Fasta reference]'
+--gstride 80
+```
+
+### `--target_proximity`
+Define the distance up- and down-stream of ontarget BED for defining target proximal mapping.
+Default: 5000
+```bash
+--target_proximity 5000
+```
+
+### `--offTarget`
+Set a threshold for defining off-target mapping.
+Default: 20
+```bash
+--offTarget 20
 ```
 
 ## Job Resources
@@ -108,13 +123,6 @@ You can also supply a run name to resume a specific run: `-resume [run-name]`. U
 ### `-c`
 Specify the path to a specific config file (this is a core NextFlow command).
 
-**NB:** Single hyphen (core Nextflow option)
-
-Note - you can use this to override defaults. For example, you can specify a config file using `-c` that contains the following:
-
-```nextflow
-process.$multiqc.module = []
-```
 
 ### `--max_memory`
 Use to set a top-limit for the default memory requirement for each process.
