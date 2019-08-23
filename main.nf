@@ -112,8 +112,6 @@ bib_file.copyTo('Static/')
 css_file = file(workflow.projectDir+'/Static/ont_css.css')
 css_file.copyTo('Static/')
 
-// //harvest_script = file(workflow.projectDir+'/bin/harvest.R')
-// //harvest_script.setPermissions(7,7,7)
 
 // Build the mapping index
 process minimap_index {
@@ -230,8 +228,6 @@ process Rpreprocess {
 
       output:
       file "delay_file.txt" into ch_delay_3
-
-      //chmod -R 777 $PWD/Analysis
 
       script:
       """
