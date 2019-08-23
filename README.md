@@ -20,10 +20,9 @@ The pipeline comes with documentation, found in the `docs/` directory:
 1. [Installation](docs/installation.md)
 2. Pipeline configuration
     * [Local installation](docs/configuration/local.md)
-    * [Adding your own system](docs/configuration/adding_your_own.md)
 3. [Running the pipeline](docs/usage.md)
 4. [Output and how to interpret the results](docs/output.md)
-5. [Troubleshooting](docs/troubleshooting.md)
+
 
 ### Credits
 This pipeline was written by Tristan Kast ([tristankast](https://github.com/TrisKast)) at [DZNE](http://www.dzne.de), using R scripts from the nanoporetech ont_tutorial_cas9 github repo (https://github.com/nanoporetech/ont_tutorial_cas9).
