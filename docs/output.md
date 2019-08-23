@@ -8,6 +8,7 @@ and processes data using the following tools and scripts:
 * [Samtools](#samtools) - suite of programs for interacting with high-throughput sequencing data
 * [harvest.R](#harvest.R) - R script for enrichment evaluation
 * [seqtk](#seqtk) - toolkit for processing sequences in FASTA/Q formats
+* [report.Rmd](#render.Rmd) - R rmarkdown script to render the end report
 
 
 ## minimap2
@@ -31,10 +32,8 @@ and processes data using the following tools and scripts:
 * `experiment_name.unmapped.quals`
   * quality values of the unmapped reads
 
-
-
 ## harvest.R
-[harvest.R]
+[harvest.R](https://github.com/nanoporetech/ont_tutorial_cas9/blob/master/Static/Source/harvest.R)
 
 **Output directory: `Analysis/OnTarget`**
 * `experiment_name.OnTarget.mappedreads`
@@ -44,8 +43,13 @@ and processes data using the following tools and scripts:
 * `experiment_name.OffTarget.mappedreads`
   *IDs of reads mapped offtarget
 
-
-
+**Output directory: `Analysis/R`**
+* `experiment_name_aggregated_coverage.Rdata`
+* `experiment_name_aggregated_offt_coverage.Rdata`
+* `experiment_name_mapping_results.Rdata`
+* `experiment_name.unmapped.rcounts.Rdata`
+* `experiment_name_enrichment_info.png`
+  * Overview of the key metrics
 
 ## seqtk
 [seqtk](https://github.com/lh3/seqtk)
@@ -58,3 +62,11 @@ and processes data using the following tools and scripts:
 **Output directory: `Analysis/OffTarget`**
 * `experiment_name.OffTarget.fastq`
   * Reads, mapped offtarget
+
+## report.Rmd
+[report.Rmd](https://github.com/nanoporetech/ont_tutorial_cas9/blob/master/ont_tutorial_cas9.Rmd)
+
+**Output directory: `.`**
+
+* `report.html`
+  * Report of the evaluation of the enrichment
